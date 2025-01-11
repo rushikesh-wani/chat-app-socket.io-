@@ -9,7 +9,9 @@ import ChatBox from "../components/chats/ChatBox";
 import TypingIndicator from "../components/chats/TypingIndicator";
 import MessageInputForm from "../forms/MessageInputForm";
 
-const socket = io(process.env.REACT_APP_SOCKET_URL);
+const socket = io(process.env.REACT_APP_SOCKET_URL, {
+  transports: ["websocket"],
+});
 
 const ChatPage = () => {
   const [message, setMessage] = useState("");
@@ -63,6 +65,7 @@ const ChatPage = () => {
   useEffect(() => {
     scrollTOBottom(chatBox);
   }, [chat]);
+
   return (
     <div className="flex flex-col items-center p-5 bg-black text-white min-h-screen">
       {isModalOpen && (
